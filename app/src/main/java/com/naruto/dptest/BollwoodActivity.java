@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 import static java.lang.Integer.parseInt;
@@ -22,19 +25,21 @@ public class BollwoodActivity extends Activity implements TextWatcher {
     private ProgressDialog pDialog;
 
 
-    EditText etMdopen,etMdclose;
-    EditText etKlopen,etKlclose;
+    EditText etMdopen, etMdclose;
+    EditText etKlopen, etKlclose;
 
-    EditText etMNopen,etMNclose;
-    EditText etMUMopen,etMUMclose;
+    EditText etMNopen, etMNclose;
+    EditText etMUMopen, etMUMclose;
 
-    String stMdopen,stMdopendigit,stMdclose,stMdclosedigit,stKlopen,stKlopendigit,stKlclose,stKlclosedigit,stMNopen,stMNopendigit,stMNclose,stMNclosedigit,stMUMopen,stMUMopendigit,stMUMclose,stMUMclosedigit;
+    String stMdopen, stMdopendigit, stMdclose, stMdclosedigit, stKlopen, stKlopendigit, stKlclose, stKlclosedigit, stMNopen, stMNopendigit, stMNclose, stMNclosedigit, stMUMopen, stMUMopendigit, stMUMclose, stMUMclosedigit;
 
     // url to create new product
     private static String url_create_product = "http://narutofans.000webhostapp.com/rjc/ej.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private String dayofToday;
+    private String todayDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         setContentView(R.layout.insertdata);
 
         initViews();
-
+        genRateTodayDateandDay();
         etMdopen.addTextChangedListener(this);
         etMdclose.addTextChangedListener(this);
         etKlopen.addTextChangedListener(this);
@@ -51,15 +56,6 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         etMNclose.addTextChangedListener(this);
         etMUMopen.addTextChangedListener(this);
         etMUMclose.addTextChangedListener(this);
-
-
-
-
-
-
-
-
-
 
 
         // Create button
@@ -77,7 +73,7 @@ public class BollwoodActivity extends Activity implements TextWatcher {
                 stMdclose = etMdclose.getText().toString();
                 stMdclosedigit = getDigit(stMdclose);
 
-                stKlopen =etKlopen.getText().toString();
+                stKlopen = etKlopen.getText().toString();
                 stKlopendigit = getDigit(stKlopen);
                 stKlclose = etKlclose.getText().toString();
                 stKlclosedigit = getDigit(stKlclose);
@@ -93,37 +89,53 @@ public class BollwoodActivity extends Activity implements TextWatcher {
                 stMUMclosedigit = getDigit(stMUMclose);
 
                 HashMap<String, String> queryValues = new HashMap<String, String>();
-                queryValues.put(DBController.KEY_MDOPEN,stMdopen);
-                queryValues.put(DBController.KEY_MDOPEN_DIGIT,stMdopendigit);
-                queryValues.put(DBController.KEY_MDCLOSE,stMdclose);
-                queryValues.put(DBController.KEY_MDCLOSE_DIGIT,stMdclosedigit);
+                queryValues.put(DBController.KEY_DATE, todayDate);
+                queryValues.put(DBController.KEY_DAYOFMONTH,dayofToday);
 
-                queryValues.put(DBController.KEY_KL_OPEN,stKlopen);
-                queryValues.put(DBController.KEY_KL_OPEN_DIGIT,stKlopendigit);
-                queryValues.put(DBController.KEY_KL_CLOSE,stKlclose);
-                queryValues.put(DBController.KEY_KL_CLOSE_DIGIT,stKlclosedigit);
+                queryValues.put(DBController.KEY_MDOPEN, stMdopen);
+                queryValues.put(DBController.KEY_MDOPEN_DIGIT, stMdopendigit);
+                queryValues.put(DBController.KEY_MDCLOSE, stMdclose);
+                queryValues.put(DBController.KEY_MDCLOSE_DIGIT, stMdclosedigit);
 
-                queryValues.put(DBController.KEY_MNOPEN,stMNopen);
-                queryValues.put(DBController.KEY_MNOPEN_DIGIT,stMNopendigit);
-                queryValues.put(DBController.KEY_MNCLOSE,stMNclose);
-                queryValues.put(DBController.KEY_MNCLOSE_DIGIT,stMNclosedigit);
+                queryValues.put(DBController.KEY_KL_OPEN, stKlopen);
+                queryValues.put(DBController.KEY_KL_OPEN_DIGIT, stKlopendigit);
+                queryValues.put(DBController.KEY_KL_CLOSE, stKlclose);
+                queryValues.put(DBController.KEY_KL_CLOSE_DIGIT, stKlclosedigit);
 
-                queryValues.put(DBController.KEY_MUM_OPEN,stMUMopen);
-                queryValues.put(DBController.KEY_MUM_OPEN_DIGIT,stMUMopendigit);
-                queryValues.put(DBController.KEY_MUM_CLOSE,stMUMclose);
-                queryValues.put(DBController.KEY_MUM_CLOSE_DIGIT,stMUMclosedigit);
+                queryValues.put(DBController.KEY_MNOPEN, stMNopen);
+                queryValues.put(DBController.KEY_MNOPEN_DIGIT, stMNopendigit);
+                queryValues.put(DBController.KEY_MNCLOSE, stMNclose);
+                queryValues.put(DBController.KEY_MNCLOSE_DIGIT, stMNclosedigit);
+
+                queryValues.put(DBController.KEY_MUM_OPEN, stMUMopen);
+                queryValues.put(DBController.KEY_MUM_OPEN_DIGIT, stMUMopendigit);
+                queryValues.put(DBController.KEY_MUM_CLOSE, stMUMclose);
+                queryValues.put(DBController.KEY_MUM_CLOSE_DIGIT, stMUMclosedigit);
 
 
                 DBController controller = new DBController(getApplicationContext());
 
                 controller.insertUser(queryValues);
 
-                Toast.makeText(getApplicationContext(),"inserted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
+    }
+
+    private void genRateTodayDateandDay() {
+        Date date = new Date();
+        SimpleDateFormat inFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            date = inFormat.parse(String.valueOf(date.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        todayDate = inFormat.format(new Date());
+        SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+        dayofToday = outFormat.format(date);
     }
 
     private void initViews() {
@@ -142,12 +154,12 @@ public class BollwoodActivity extends Activity implements TextWatcher {
     private String getDigit(String input) {
 
         char[] xy = input.toCharArray();
-        int temp= 0;
-        for(char d :xy){
-            temp= temp + parseInt(String.valueOf(d));
+        int temp = 0;
+        for (char d : xy) {
+            temp = temp + parseInt(String.valueOf(d));
         }
         String twodigit = String.valueOf(temp);
-        if(twodigit.length()==2){
+        if (twodigit.length() == 2) {
             String lastdigit = twodigit.substring(1);
             temp = parseInt(lastdigit);
         }
@@ -155,9 +167,9 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         return String.valueOf(temp);
     }
 
-    private  void isSequence(int number){
+    private void isSequence(int number) {
 
-        int[] test = new int[] {4,5,7};
+        int[] test = new int[]{4, 5, 7};
 
         Arrays.sort(test);
         for (int i = 0; i < test.length - 1; i++) {
@@ -167,7 +179,8 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         }
 
     }
-    public int  ArraytoNumber(int[] numbtoarray){
+
+    public int ArraytoNumber(int[] numbtoarray) {
         //    int a[] = {60, 321, 5};
 
         int finalNumber = 0;
@@ -186,18 +199,16 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         return finalNumber;
     }
 
-    public int[] intTOArray(int guess){
+    public int[] intTOArray(int guess) {
         String temp = Integer.toString(guess);
         int[] newGuess = new int[temp.length()];
-        for (int i = 0; i < temp.length(); i++)
-        {
+        for (int i = 0; i < temp.length(); i++) {
             newGuess[i] = temp.charAt(i) - '0';
         }
         return newGuess;
     }
 
-    void pushZerosToEnd(int arr[], int n)
-    {
+    void pushZerosToEnd(int arr[], int n) {
         int count = 0;  // Count of non-zero elements
 
         // Traverse the array. If element encountered is non-
@@ -228,47 +239,34 @@ public class BollwoodActivity extends Activity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (etMdopen.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMdopen,s);
-        }else if (etMdclose.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMdclose,s);
-        }else if (etKlopen.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etKlopen,s);
-        }else if (etKlclose.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etKlclose,s);
+        if (etMdopen.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMdopen, s);
+        } else if (etMdclose.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMdclose, s);
+        } else if (etKlopen.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etKlopen, s);
+        } else if (etKlclose.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etKlclose, s);
+        } else if (etMNopen.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMNopen, s);
+        } else if (etMNclose.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMNclose, s);
+        } else if (etMUMopen.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMUMopen, s);
+        } else if (etMUMclose.getText().hashCode() == s.hashCode()) {
+            methodforMultiTextwatcher(etMUMclose, s);
         }
-
-        else if (etMNopen.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMNopen,s);
-        }else if (etMNclose.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMNclose,s);
-        }else if (etMUMopen.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMUMopen,s);
-        }else if (etMUMclose.getText().hashCode() == s.hashCode())
-        {
-            methodforMultiTextwatcher(etMUMclose,s);
-        }
-
-
-
 
 
     }
 
     private void methodforMultiTextwatcher(EditText etext, Editable s) {
-        if(!s.toString().equals("")){
+        if (!s.toString().equals("")) {
             int before = Integer.parseInt(s.toString());
             int[] numbtoarray = intTOArray(before);
 
             Arrays.sort(numbtoarray);
-            pushZerosToEnd(numbtoarray,numbtoarray.length);
+            pushZerosToEnd(numbtoarray, numbtoarray.length);
 
             int after = ArraytoNumber(numbtoarray);
 

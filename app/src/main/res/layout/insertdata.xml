@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal" >
+
+
+    <!-- Input Name -->
+    <EditText android:id="@+id/mdopen"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:textColorHint="@color/colorPrimary"
+        android:layout_weight="1"
+        android:hint="M"
+        android:inputType="number"
+        android:maxLength="3"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+/>
+
+
+    <!-- Input Price -->
+    <EditText android:id="@+id/mdclose"
+        android:layout_weight="1"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="MD_"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="horizontal" >
+
+
+        <!-- Input Name -->
+        <EditText android:id="@+id/klopen"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="3"
+            android:hint="KL_open"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+          />
+
+
+        <!-- Input Price -->
+        <EditText android:id="@+id/klclose"
+            android:layout_weight="1"
+            android:textColorHint="@color/colorPrimary"
+            android:hint="KL_close"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="horizontal" >
+
+
+        <!-- Input Name -->
+        <EditText android:id="@+id/mnopen"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="3"
+            android:hint="MN_open"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+            />
+
+
+        <!-- Input Price -->
+        <EditText android:id="@+id/mnclose"
+            android:layout_weight="1"
+            android:textColorHint="@color/colorPrimary"
+            android:hint="MN_close"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="horizontal" >
+
+
+        <!-- Input Name -->
+        <EditText android:id="@+id/mumopen"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="3"
+            android:hint="MUM_open"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+            />
+
+
+        <!-- Input Price -->
+        <EditText android:id="@+id/mumclose"
+            android:layout_weight="1"
+            android:textColorHint="@color/colorPrimary"
+            android:hint="MUM_close"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_marginBottom="15dip"
+
+            />
+    </LinearLayout>
+
+
+
+    <!-- Button Create Product -->
+    <Button android:id="@+id/btnCreateProduct"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="InsertData"/>
+
+</LinearLayout>
