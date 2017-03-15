@@ -57,7 +57,7 @@ public class DBController  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         String query;
-        query = "CREATE TABLE "+TABLE_NAME+" ("+KEY_DATE+"TEXT PRIMARY KEY, "+KEY_DAYOFMONTH+" TEXT, "+KEY_MDOPEN+" TEXT, "+KEY_MDOPEN_DIGIT+" TEXT, "+KEY_MDCLOSE+" TEXT, "+KEY_MDCLOSE_DIGIT+" TEXT, " +KEY_KL_OPEN+" TEXT, " +KEY_KL_OPEN_DIGIT+" TEXT, " +KEY_KL_CLOSE+" TEXT, " +KEY_KL_CLOSE_DIGIT+" TEXT, " +KEY_MNOPEN+" TEXT, " +KEY_MNOPEN_DIGIT+" TEXT, " +KEY_MNCLOSE+" TEXT, " +KEY_MNCLOSE_DIGIT+" TEXT, " +KEY_MUM_OPEN+" TEXT, " +KEY_MUM_OPEN_DIGIT+" TEXT, " +KEY_MUM_CLOSE+" TEXT, " +KEY_MUM_CLOSE_DIGIT+" TEXT, " +KEY_UPDATESTATUS+" TEXT)";
+        query = "CREATE TABLE "+TABLE_NAME+" ( ID INTEGER PRIMARY KEY AUTOINCREMENT, "+KEY_DATE+" TEXT UNIQUE, "+KEY_DAYOFMONTH+" TEXT, "+KEY_MDOPEN+" TEXT, "+KEY_MDOPEN_DIGIT+" TEXT, "+KEY_MDCLOSE+" TEXT, "+KEY_MDCLOSE_DIGIT+" TEXT, " +KEY_KL_OPEN+" TEXT, " +KEY_KL_OPEN_DIGIT+" TEXT, " +KEY_KL_CLOSE+" TEXT, " +KEY_KL_CLOSE_DIGIT+" TEXT, " +KEY_MNOPEN+" TEXT, " +KEY_MNOPEN_DIGIT+" TEXT, " +KEY_MNCLOSE+" TEXT, " +KEY_MNCLOSE_DIGIT+" TEXT, " +KEY_MUM_OPEN+" TEXT, " +KEY_MUM_OPEN_DIGIT+" TEXT, " +KEY_MUM_CLOSE+" TEXT, " +KEY_MUM_CLOSE_DIGIT+" TEXT, " +KEY_UPDATESTATUS+" TEXT)";
         database.execSQL(query);
     }
     @Override
@@ -114,8 +114,28 @@ public class DBController  extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("userId", cursor.getString(0));
-                map.put("userName", cursor.getString(1));
+                map.put(KEY_DATE, cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                map.put(KEY_DAYOFMONTH, cursor.getString(cursor.getColumnIndex(KEY_DAYOFMONTH)));
+                map.put(KEY_MDOPEN, cursor.getString(cursor.getColumnIndex(KEY_MDOPEN)));
+                map.put(KEY_MDOPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MDOPEN_DIGIT)));
+                map.put(KEY_MDCLOSE, cursor.getString(cursor.getColumnIndex(KEY_MDCLOSE)));
+                map.put(KEY_MDCLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MDCLOSE_DIGIT)));
+
+                map.put(KEY_KL_OPEN, cursor.getString(cursor.getColumnIndex(KEY_KL_OPEN)));
+                map.put(KEY_KL_OPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_KL_OPEN_DIGIT)));
+                map.put(KEY_KL_CLOSE, cursor.getString(cursor.getColumnIndex(KEY_KL_CLOSE)));
+                map.put(KEY_KL_CLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_KL_CLOSE_DIGIT)));
+
+                map.put(KEY_MNOPEN, cursor.getString(cursor.getColumnIndex(KEY_MNOPEN)));
+                map.put(KEY_MNOPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MNOPEN_DIGIT)));
+                map.put(KEY_MNCLOSE, cursor.getString(cursor.getColumnIndex(KEY_MNCLOSE)));
+                map.put(KEY_MNCLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MNCLOSE_DIGIT)));
+
+                map.put(KEY_MUM_OPEN, cursor.getString(cursor.getColumnIndex(KEY_MUM_OPEN)));
+                map.put(KEY_MUM_OPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MUM_OPEN_DIGIT)));
+                map.put(KEY_MUM_CLOSE, cursor.getString(cursor.getColumnIndex(KEY_MUM_CLOSE)));
+                map.put(KEY_MUM_CLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MUM_CLOSE_DIGIT)));
+
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
