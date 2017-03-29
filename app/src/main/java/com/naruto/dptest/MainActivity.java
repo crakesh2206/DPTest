@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+         String rakesh;
         final FanMenuButtons sub = (FanMenuButtons) findViewById(R.id.myFABSubmenu);
 //        //Display Sync status of SQLite DB
 //        DBController controller = new DBController(this);
