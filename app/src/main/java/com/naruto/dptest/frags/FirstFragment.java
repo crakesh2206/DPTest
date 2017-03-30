@@ -7,7 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.naruto.dptest.DBController;
 import com.naruto.dptest.R;
+
+import java.util.HashMap;
 
 /**
  * Created by Codefingers-1 on 29-03-2017.
@@ -17,23 +22,16 @@ public class FirstFragment extends Fragment {
     // Store instance variables
     private String title;
     private int page;
-
-    // newInstance constructor for creating fragment with arguments
-    public static FirstFragment newInstance(int page, String title) {
-        FirstFragment fragmentFirst = new FirstFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragmentFirst.setArguments(args);
-        return fragmentFirst;
+    HashMap<String, String> stringStringHashMap;
+    public FirstFragment(HashMap<String, String> stringStringHashMap){
+        this.stringStringHashMap = stringStringHashMap;
     }
 
     // Store instance variables based on arguments passed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
+
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -41,8 +39,62 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listitem, container, false);
-        TextView tvLabel = (TextView) view.findViewById(R.id._day);
-        tvLabel.setText(page + " -- " + title);
+        TextView tvDay= (TextView) view.findViewById(R.id._day);
+        TextView tvDate = (TextView) view.findViewById(R.id._date);
+
+        TextView tvMDopen = (TextView) view.findViewById(R.id.m_d_open);
+        TextView tvMDopen_digit = (TextView) view.findViewById(R.id.m_d_open_digt);
+        TextView tvMDclose = (TextView) view.findViewById(R.id.m_d_close);
+        TextView tvMDclose_digit = (TextView) view.findViewById(R.id.m_d_close_digt);
+
+        TextView tvKLopen = (TextView) view.findViewById(R.id.k_l_open);
+        TextView tvKLopendigit = (TextView) view.findViewById(R.id.k_l_open_digt);
+        TextView tvKLclose = (TextView) view.findViewById(R.id.k_l_close);
+        TextView tvKLclose_digit = (TextView) view.findViewById(R.id.k_l_close_digt);
+
+        TextView tvMNopen = (TextView) view.findViewById(R.id.m_n_open);
+        TextView tvMNopen_digit = (TextView) view.findViewById(R.id.m_n_open_digt);
+        TextView tvMNclose = (TextView) view.findViewById(R.id.m_n_close);
+        TextView tvMNclose_digit = (TextView) view.findViewById(R.id.m_n_close_digt);
+
+        TextView tvMMopen = (TextView) view.findViewById(R.id.m_m_open);
+        TextView tvMMopen_digit = (TextView) view.findViewById(R.id.m_m_open_digt);
+        TextView tvMMclose = (TextView) view.findViewById(R.id.m_m_close);
+        TextView tvMMclose_digit = (TextView) view.findViewById(R.id.m_m_close_digt);
+
+
+
+
+
+
+
+        tvDay.setText(stringStringHashMap.get(DBController.KEY_DAYOFMONTH));
+        tvDate.setText(stringStringHashMap.get(DBController.KEY_DATE));
+
+        tvMDopen.setText(stringStringHashMap.get(DBController.KEY_MDOPEN));
+        tvMDopen_digit.setText(stringStringHashMap.get(DBController.KEY_MDOPEN_DIGIT));
+        tvMDclose.setText(stringStringHashMap.get(DBController.KEY_MDCLOSE));
+        tvMDclose_digit.setText(stringStringHashMap.get(DBController.KEY_MDCLOSE_DIGIT));
+
+        tvKLopen.setText(stringStringHashMap.get(DBController.KEY_KL_OPEN));
+        tvKLopendigit.setText(stringStringHashMap.get(DBController.KEY_KL_OPEN_DIGIT));
+        tvKLclose.setText(stringStringHashMap.get(DBController.KEY_KL_CLOSE));
+        tvKLclose_digit.setText(stringStringHashMap.get(DBController.KEY_KL_CLOSE_DIGIT));
+
+        tvMNopen.setText(stringStringHashMap.get(DBController.KEY_MNOPEN));
+        tvMNopen_digit.setText(stringStringHashMap.get(DBController.KEY_MNOPEN_DIGIT));
+        tvMNclose.setText(stringStringHashMap.get(DBController.KEY_MNCLOSE));
+        tvMNclose_digit.setText(stringStringHashMap.get(DBController.KEY_MNCLOSE_DIGIT));
+
+        tvMMopen.setText(stringStringHashMap.get(DBController.KEY_MUM_OPEN));
+        tvMMopen_digit.setText(stringStringHashMap.get(DBController.KEY_MUM_OPEN_DIGIT));
+        tvMMclose.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE));
+        tvMMclose_digit.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE_DIGIT));
+
+        YoYo.with(Techniques.Shake).duration(700).repeat(20).playOn(tvDate);
+
+
+
         return view;
     }
 }

@@ -1,6 +1,7 @@
 package com.naruto.dptest;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,21 +17,29 @@ import android.widget.Toast;
 import com.bcgdv.asia.lib.fanmenu.FanMenuButtons;
 import com.naruto.dptest.frags.FirstFragment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private MyPagerAdapter adapterViewPager;
-
+    ArrayList<HashMap<String,String>> dataofTable;
+    ViewPager vpPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         final FanMenuButtons sub = (FanMenuButtons) findViewById(R.id.myFABSubmenu);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-        vpPager.setAdapter(adapterViewPager);
+
+        vpPager = (ViewPager) findViewById(R.id.vpPager);
+
+          new LongOperation().execute();
+
+
 
 
 
@@ -153,36 +162,29 @@ public class MainActivity extends AppCompatActivity {
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 3;
-
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+         private ArrayList<HashMap<String, String>> dataofTable;
+        public MyPagerAdapter(FragmentManager fragmentManager, ArrayList<HashMap<String, String>> dataofTable) {
             super(fragmentManager);
+            this.dataofTable = dataofTable;
         }
 
         // Returns total number of pages
         @Override
         public int getCount() {
-            return NUM_ITEMS;
+            return dataofTable.size();
         }
 
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0: // Fragment # 0 - This will show FirstFragment
-                    return FirstFragment.newInstance(0, "Page # 1");
-                case 1: // Fragment # 0 - This will show FirstFragment different title
-                    return FirstFragment.newInstance(1, "Page # 2");
-                case 2: // Fragment # 1 - This will show SecondFragment
-                    return FirstFragment.newInstance(2, "Page # 3");
-                default:
-                    return null;
+                    return new FirstFragment(dataofTable.get(position));
+
             }
-        }
 
         // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page " + position;
+            return dataofTable.get(position).get(DBController.KEY_DATE);
         }
 
     }
@@ -190,8 +192,29 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private class LongOperation extends AsyncTask<String, Void, String> {
 
-}
+        @Override
+        protected String doInBackground(String... params) {
+            DBController rj = new DBController(getApplicationContext());
+            dataofTable = rj.getAllUsers();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            adapterViewPager = new MainActivity.MyPagerAdapter(getSupportFragmentManager(),dataofTable);
+            vpPager.setAdapter(adapterViewPager);
+        }
+    }
+    }
+
+
+
+
+
+
 // take number
 //convert to array>>>
 // >>sorting>>
