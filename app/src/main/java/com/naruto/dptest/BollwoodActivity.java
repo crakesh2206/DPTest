@@ -10,16 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
 import static java.lang.Integer.parseInt;
 
 
-public class BollwoodActivity extends Activity implements TextWatcher {
+public class BollwoodActivity extends Activity implements TextWatcher, DatePickerDialog.OnDateSetListener {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -47,7 +50,7 @@ public class BollwoodActivity extends Activity implements TextWatcher {
         setContentView(R.layout.insertdata);
 
         initViews();
-        genRateTodayDateandDay();
+       // genRateTodayDateandDay();
         etMdopen.addTextChangedListener(this);
         etMdclose.addTextChangedListener(this);
         etKlopen.addTextChangedListener(this);
@@ -67,7 +70,14 @@ public class BollwoodActivity extends Activity implements TextWatcher {
             @Override
             public void onClick(View view) {
                 // creating new product in background thread
-
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        BollwoodActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.show(getFragmentManager(), "Datepickerdialog");
                 stMdopen = etMdopen.getText().toString();
                 stMdopendigit = getDigit(stMdopen);
                 stMdclose = etMdclose.getText().toString();
@@ -281,4 +291,10 @@ public class BollwoodActivity extends Activity implements TextWatcher {
     }
 
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+        todayDate = String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear)+"-"+String.valueOf(year);
+        SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+        dayofToday = outFormat.format(todayDate);
+    }
 }

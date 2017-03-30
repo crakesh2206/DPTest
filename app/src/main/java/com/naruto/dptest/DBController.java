@@ -12,8 +12,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -147,24 +148,46 @@ public class DBController  extends SQLiteOpenHelper {
      * Compose JSON out of SQLite records
      * @return
      */
-    public String composeJSONfromSQLite(){
-        ArrayList<HashMap<String, String>> wordList;
-        wordList = new ArrayList<HashMap<String, String>>();
-        String selectQuery = "SELECT  * FROM users where udpateStatus = '"+"no"+"'";
+    public JSONObject composeJSONfromSQLite() throws JSONException {
+        JSONArray wordList = new JSONArray();
+        JSONObject last = new JSONObject();
+        String selectQuery = "SELECT  * FROM records where updatestatus = '"+"no"+"'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("userId", cursor.getString(0));
-                map.put("userName", cursor.getString(1));
-                wordList.add(map);
+               JSONObject map = new JSONObject();
+                map.put(KEY_DATE, cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                map.put(KEY_DAYOFMONTH, cursor.getString(cursor.getColumnIndex(KEY_DAYOFMONTH)));
+                map.put(KEY_MDOPEN, cursor.getString(cursor.getColumnIndex(KEY_MDOPEN)));
+                map.put(KEY_MDOPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MDOPEN_DIGIT)));
+                map.put(KEY_MDCLOSE, cursor.getString(cursor.getColumnIndex(KEY_MDCLOSE)));
+                map.put(KEY_MDCLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MDCLOSE_DIGIT)));
+
+                map.put(KEY_KL_OPEN, cursor.getString(cursor.getColumnIndex(KEY_KL_OPEN)));
+                map.put(KEY_KL_OPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_KL_OPEN_DIGIT)));
+                map.put(KEY_KL_CLOSE, cursor.getString(cursor.getColumnIndex(KEY_KL_CLOSE)));
+                map.put(KEY_KL_CLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_KL_CLOSE_DIGIT)));
+
+                map.put(KEY_MNOPEN, cursor.getString(cursor.getColumnIndex(KEY_MNOPEN)));
+                map.put(KEY_MNOPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MNOPEN_DIGIT)));
+                map.put(KEY_MNCLOSE, cursor.getString(cursor.getColumnIndex(KEY_MNCLOSE)));
+                map.put(KEY_MNCLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MNCLOSE_DIGIT)));
+
+                map.put(KEY_MUM_OPEN, cursor.getString(cursor.getColumnIndex(KEY_MUM_OPEN)));
+                map.put(KEY_MUM_OPEN_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MUM_OPEN_DIGIT)));
+                map.put(KEY_MUM_CLOSE, cursor.getString(cursor.getColumnIndex(KEY_MUM_CLOSE)));
+                map.put(KEY_MUM_CLOSE_DIGIT, cursor.getString(cursor.getColumnIndex(KEY_MUM_CLOSE_DIGIT)));
+                wordList.put(map);
             } while (cursor.moveToNext());
+
+            last.put("records",wordList);
         }
         database.close();
-        Gson gson = new GsonBuilder().create();
-        //Use GSON to serialize Array List to JSON
-        return gson.toJson(wordList);
+//        Gson gson = new GsonBuilder().create();
+//        //Use GSON to serialize Array List to JSON
+//        return gson.toJson(wordList);
+        return last;
     }
 
     /**
@@ -187,7 +210,7 @@ public class DBController  extends SQLiteOpenHelper {
      */
     public int dbSyncCount(){
         int count = 0;
-        String selectQuery = "SELECT  * FROM records where udpateStatus = '"+"no"+"'";
+        String selectQuery = "SELECT  * FROM records where updatestatus = '"+"no"+"'";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         count = cursor.getCount();
@@ -197,12 +220,12 @@ public class DBController  extends SQLiteOpenHelper {
 
     /**
      * Update Sync status against each User ID
-     * @param id
+     * @param
      * @param status
      */
-    public void updateSyncStatus(String id, String status){
+    public void updateSyncStatus(String dateparam, String status){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update users set udpateStatus = '"+ status +"' where userId="+"'"+ id +"'";
+        String updateQuery = "Update records set udpatestatus = '"+ status +"' where "+KEY_DATE+" = " +"'"+ dateparam +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();

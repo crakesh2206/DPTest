@@ -3,19 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ffffff"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
 
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        card_view:cardCornerRadius="4dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        card_view:cardCornerRadius="4dp">
+        android:layout_centerHorizontal="true">
 
 
 
@@ -33,6 +31,7 @@
             >
             <TextView
                 android:id="@+id/_date"
+                android:layout_marginLeft="10dp"
                 android:text="15-03-2017"
                 android:textSize="18dp"
                 android:fontFamily="sans-serif-condensed"
@@ -43,6 +42,7 @@
             <TextView
                 android:text="Wednesday"
                 android:id="@+id/_day"
+                android:layout_marginRight="10dp"
                 android:textSize="18dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="right"
@@ -68,6 +68,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 />
 
         </LinearLayout>
@@ -81,6 +82,7 @@
                 android:id="@+id/m_d_open"
                 android:text="1 4 7"
                 android:ems="1"
+                android:textSize="25dp"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -88,8 +90,10 @@
                 />
             <TextView
                 android:id="@+id/m_d_open_digt"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="2"
+                android:textStyle="bold"
+                android:textSize="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -97,8 +101,9 @@
                 />
             <TextView
                 android:text="3"
-                android:id="@+id/m_d_close"
-                android:gravity="center"
+                android:textSize="50dp"
+                android:id="@+id/m_d_close_digt"
+                android:gravity="left"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -106,8 +111,9 @@
                 />
             <TextView
                 android:text="2 4 7"
-                android:id="@+id/m_d_close_digt"
+                android:id="@+id/m_d_close"
                 android:gravity="center"
+                android:textSize="25dp"
                 android:ems="1"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -146,6 +152,7 @@
                 android:id="@+id/k_l_open"
                 android:text="1 4 7"
                 android:ems="1"
+                android:textSize="25dp"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -153,8 +160,9 @@
                 />
             <TextView
                 android:id="@+id/k_l_open_digt"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="2"
+                android:textSize="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -162,8 +170,9 @@
                 />
             <TextView
                 android:text="3"
-                android:id="@+id/k_l_close"
-                android:gravity="center"
+                android:id="@+id/k_l_close_digt"
+                android:textSize="50dp"
+                android:gravity="left"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -171,7 +180,8 @@
                 />
             <TextView
                 android:text="2 4 7"
-                android:id="@+id/k_l_close_digt"
+                android:textSize="25dp"
+                android:id="@+id/k_l_close"
                 android:gravity="center"
                 android:ems="1"
                 android:layout_width="0dp"
@@ -211,6 +221,7 @@
                 android:id="@+id/m_n_open"
                 android:text="1 4 7"
                 android:ems="1"
+                android:textSize="25dp"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -218,8 +229,9 @@
                 />
             <TextView
                 android:id="@+id/m_n_open_digt"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="2"
+                android:textSize="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -227,8 +239,10 @@
                 />
             <TextView
                 android:text="3"
-                android:id="@+id/m_n_close"
-                android:gravity="center"
+
+                android:id="@+id/m_n_close_digt"
+                android:textSize="50dp"
+                android:gravity="left"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -236,9 +250,10 @@
                 />
             <TextView
                 android:text="2 4 7"
-                android:id="@+id/m_n_close_digt"
+                android:id="@+id/m_n_close"
                 android:gravity="center"
                 android:ems="1"
+                android:textSize="25dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -276,6 +291,7 @@
                 android:id="@+id/m_m_open"
                 android:text="1 4 7"
                 android:ems="1"
+                android:textSize="25dp"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -283,8 +299,9 @@
                 />
             <TextView
                 android:id="@+id/m_m_open_digt"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="2"
+                android:textSize="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -292,9 +309,9 @@
                 />
             <TextView
                 android:text="3"
-
-                android:id="@+id/m_m_close"
-                android:gravity="center"
+                android:id="@+id/m_m_close_digt"
+                 android:textSize="50dp"
+                android:gravity="left"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -302,9 +319,10 @@
                 />
             <TextView
                 android:text="2 4 7"
-                android:id="@+id/m_m_close_digt"
+                android:id="@+id/m_m_close"
                 android:gravity="center"
                 android:ems="1"
+                android:textSize="25dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

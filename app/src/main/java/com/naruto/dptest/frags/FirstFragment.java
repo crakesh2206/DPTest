@@ -1,5 +1,6 @@
 package com.naruto.dptest.frags;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,7 +64,7 @@ public class FirstFragment extends Fragment {
         TextView tvMMclose_digit = (TextView) view.findViewById(R.id.m_m_close_digt);
 
 
-
+        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/StencilStd.otf");
 
 
 
@@ -91,7 +92,39 @@ public class FirstFragment extends Fragment {
         tvMMclose.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE));
         tvMMclose_digit.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE_DIGIT));
 
-        YoYo.with(Techniques.Shake).duration(700).repeat(20).playOn(tvDate);
+        tvMDopen_digit.setTypeface(custom_font);
+        tvMDclose_digit.setTypeface(custom_font);
+        tvMDopen_digit.setTextColor(getResources().getColor(R.color.pink));
+        tvMDclose_digit.setTextColor(getResources().getColor(R.color.pink));
+
+        tvKLopendigit.setTypeface(custom_font);
+        tvKLclose_digit.setTypeface(custom_font);
+        tvKLopendigit.setTextColor(getResources().getColor(R.color.perpal));
+        tvKLclose_digit.setTextColor(getResources().getColor(R.color.perpal));
+
+        tvMNopen_digit.setTypeface(custom_font);
+        tvMNclose_digit.setTypeface(custom_font);
+        tvMNopen_digit.setTextColor(getResources().getColor(R.color.pink));
+        tvMNclose_digit.setTextColor(getResources().getColor(R.color.pink));
+        tvMMopen_digit.setTypeface(custom_font);
+        tvMMclose_digit.setTypeface(custom_font);
+        tvMMopen_digit.setTextColor(getResources().getColor(R.color.perpal));
+        tvMMclose_digit.setTextColor(getResources().getColor(R.color.perpal));
+
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDopen_digit);
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDclose_digit);
+
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLopendigit);
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLclose_digit);
+
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNopen_digit);
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNclose_digit);
+
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMopen_digit);
+        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMclose_digit);
+
+
+
 
 
 
