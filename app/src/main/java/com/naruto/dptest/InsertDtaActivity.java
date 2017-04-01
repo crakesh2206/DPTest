@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import static java.lang.Integer.parseInt;
 
 
-public class BollwoodActivity extends Activity implements TextWatcher, DatePickerDialog.OnDateSetListener {
+public class InsertDtaActivity extends Activity implements TextWatcher, DatePickerDialog.OnDateSetListener {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -41,8 +42,8 @@ public class BollwoodActivity extends Activity implements TextWatcher, DatePicke
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private String dayofToday;
-    private String todayDate;
+    private String dayofToday = "";
+    private String todayDate = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,72 +64,86 @@ public class BollwoodActivity extends Activity implements TextWatcher, DatePicke
 
         // Create button
         Button btnCreateProduct = (Button) findViewById(R.id.btnCreateProduct);
-
+        Button btnDate = (Button) findViewById(R.id.btndate);
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        InsertDtaActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH));
+            }
+        });
         // button click event
         btnCreateProduct.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 // creating new product in background thread
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        BollwoodActivity.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
-                );
-                dpd.show(getFragmentManager(), "Datepickerdialog");
-                stMdopen = etMdopen.getText().toString();
-                stMdopendigit = getDigit(stMdopen);
-                stMdclose = etMdclose.getText().toString();
-                stMdclosedigit = getDigit(stMdclose);
 
-                stKlopen = etKlopen.getText().toString();
-                stKlopendigit = getDigit(stKlopen);
-                stKlclose = etKlclose.getText().toString();
-                stKlclosedigit = getDigit(stKlclose);
+             if(todayDate.isEmpty() && dayofToday.isEmpty()) {
+                 Calendar now = Calendar.getInstance();
+                 DatePickerDialog dpd = DatePickerDialog.newInstance(
+                         InsertDtaActivity.this,
+                         now.get(Calendar.YEAR),
+                         now.get(Calendar.MONTH),
+                         now.get(Calendar.DAY_OF_MONTH)
+                 );
+                 dpd.show(getFragmentManager(), "Datepickerdialog");
+             }else {
+                 stMdopen = etMdopen.getText().toString();
+                 stMdopendigit = getDigit(stMdopen);
+                 stMdclose = etMdclose.getText().toString();
+                 stMdclosedigit = getDigit(stMdclose);
 
-                stMNopen = etMNopen.getText().toString();
-                stMNopendigit = getDigit(stMNopen);
-                stMNclose = etMNclose.getText().toString();
-                stMNclosedigit = getDigit(stMNclose);
+                 stKlopen = etKlopen.getText().toString();
+                 stKlopendigit = getDigit(stKlopen);
+                 stKlclose = etKlclose.getText().toString();
+                 stKlclosedigit = getDigit(stKlclose);
 
-                stMUMopen = etMUMopen.getText().toString();
-                stMUMopendigit = getDigit(stMUMopen);
-                stMUMclose = etMUMclose.getText().toString();
-                stMUMclosedigit = getDigit(stMUMclose);
+                 stMNopen = etMNopen.getText().toString();
+                 stMNopendigit = getDigit(stMNopen);
+                 stMNclose = etMNclose.getText().toString();
+                 stMNclosedigit = getDigit(stMNclose);
 
-                HashMap<String, String> queryValues = new HashMap<String, String>();
-                queryValues.put(DBController.KEY_DATE, todayDate);
-                queryValues.put(DBController.KEY_DAYOFMONTH,dayofToday);
+                 stMUMopen = etMUMopen.getText().toString();
+                 stMUMopendigit = getDigit(stMUMopen);
+                 stMUMclose = etMUMclose.getText().toString();
+                 stMUMclosedigit = getDigit(stMUMclose);
 
-                queryValues.put(DBController.KEY_MDOPEN, stMdopen);
-                queryValues.put(DBController.KEY_MDOPEN_DIGIT, stMdopendigit);
-                queryValues.put(DBController.KEY_MDCLOSE, stMdclose);
-                queryValues.put(DBController.KEY_MDCLOSE_DIGIT, stMdclosedigit);
+                 HashMap<String, String> queryValues = new HashMap<String, String>();
+                 queryValues.put(DBController.KEY_DATE, todayDate);
+                 queryValues.put(DBController.KEY_DAYOFMONTH, dayofToday);
 
-                queryValues.put(DBController.KEY_KL_OPEN, stKlopen);
-                queryValues.put(DBController.KEY_KL_OPEN_DIGIT, stKlopendigit);
-                queryValues.put(DBController.KEY_KL_CLOSE, stKlclose);
-                queryValues.put(DBController.KEY_KL_CLOSE_DIGIT, stKlclosedigit);
+                 queryValues.put(DBController.KEY_MDOPEN, stMdopen);
+                 queryValues.put(DBController.KEY_MDOPEN_DIGIT, stMdopendigit);
+                 queryValues.put(DBController.KEY_MDCLOSE, stMdclose);
+                 queryValues.put(DBController.KEY_MDCLOSE_DIGIT, stMdclosedigit);
 
-                queryValues.put(DBController.KEY_MNOPEN, stMNopen);
-                queryValues.put(DBController.KEY_MNOPEN_DIGIT, stMNopendigit);
-                queryValues.put(DBController.KEY_MNCLOSE, stMNclose);
-                queryValues.put(DBController.KEY_MNCLOSE_DIGIT, stMNclosedigit);
+                 queryValues.put(DBController.KEY_KL_OPEN, stKlopen);
+                 queryValues.put(DBController.KEY_KL_OPEN_DIGIT, stKlopendigit);
+                 queryValues.put(DBController.KEY_KL_CLOSE, stKlclose);
+                 queryValues.put(DBController.KEY_KL_CLOSE_DIGIT, stKlclosedigit);
 
-                queryValues.put(DBController.KEY_MUM_OPEN, stMUMopen);
-                queryValues.put(DBController.KEY_MUM_OPEN_DIGIT, stMUMopendigit);
-                queryValues.put(DBController.KEY_MUM_CLOSE, stMUMclose);
-                queryValues.put(DBController.KEY_MUM_CLOSE_DIGIT, stMUMclosedigit);
+                 queryValues.put(DBController.KEY_MNOPEN, stMNopen);
+                 queryValues.put(DBController.KEY_MNOPEN_DIGIT, stMNopendigit);
+                 queryValues.put(DBController.KEY_MNCLOSE, stMNclose);
+                 queryValues.put(DBController.KEY_MNCLOSE_DIGIT, stMNclosedigit);
+
+                 queryValues.put(DBController.KEY_MUM_OPEN, stMUMopen);
+                 queryValues.put(DBController.KEY_MUM_OPEN_DIGIT, stMUMopendigit);
+                 queryValues.put(DBController.KEY_MUM_CLOSE, stMUMclose);
+                 queryValues.put(DBController.KEY_MUM_CLOSE_DIGIT, stMUMclosedigit);
 
 
-                DBController controller = new DBController(getApplicationContext());
+                 DBController controller = new DBController(getApplicationContext());
 
-                controller.insertUser(queryValues);
+                 controller.insertUser(queryValues);
 
-                Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_SHORT).show();
-
+                 Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_SHORT).show();
+             }
             }
         });
 
@@ -293,8 +308,19 @@ public class BollwoodActivity extends Activity implements TextWatcher, DatePicke
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        todayDate = String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear)+"-"+String.valueOf(year);
-        SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
-        dayofToday = outFormat.format(todayDate);
+        todayDate = String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear+1)+"-"+String.valueOf(year);
+
+        SimpleDateFormat inFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date date = inFormat.parse(todayDate);
+            SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+            dayofToday = outFormat.format(date);
+            Log.d("dayss",dayofToday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }

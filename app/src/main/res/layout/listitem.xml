@@ -20,6 +20,7 @@
     <LinearLayout
     android:id="@+id/itemroot"
     android:layout_width="match_parent"
+        android:background="@drawable/cardv"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -83,6 +84,7 @@
                 android:text="1 4 7"
                 android:ems="1"
                 android:textSize="25dp"
+                android:textColor="@color/green_fam"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -115,6 +117,7 @@
                 android:gravity="center"
                 android:textSize="25dp"
                 android:ems="1"
+                android:textColor="@color/green_fam"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -152,6 +155,7 @@
                 android:id="@+id/k_l_open"
                 android:text="1 4 7"
                 android:ems="1"
+                android:textColor="@color/green_fam"
                 android:textSize="25dp"
                 android:gravity="center"
                 android:layout_width="0dp"
@@ -181,6 +185,7 @@
             <TextView
                 android:text="2 4 7"
                 android:textSize="25dp"
+                android:textColor="@color/green_fam"
                 android:id="@+id/k_l_close"
                 android:gravity="center"
                 android:ems="1"
@@ -220,6 +225,7 @@
             <TextView
                 android:id="@+id/m_n_open"
                 android:text="1 4 7"
+                android:textColor="@color/green_fam"
                 android:ems="1"
                 android:textSize="25dp"
                 android:gravity="center"
@@ -251,6 +257,7 @@
             <TextView
                 android:text="2 4 7"
                 android:id="@+id/m_n_close"
+                android:textColor="@color/green_fam"
                 android:gravity="center"
                 android:ems="1"
                 android:textSize="25dp"
@@ -292,6 +299,7 @@
                 android:text="1 4 7"
                 android:ems="1"
                 android:textSize="25dp"
+                android:textColor="@color/green_fam"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -320,6 +328,7 @@
             <TextView
                 android:text="2 4 7"
                 android:id="@+id/m_m_close"
+                android:textColor="@color/green_fam"
                 android:gravity="center"
                 android:ems="1"
                 android:textSize="25dp"

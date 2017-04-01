@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     String[] a = getResources().getStringArray(R.array.fan_labels);
                     if (a[index].equals("Technology News")) {
                         submenu.toggleShow();
-                        Intent i = new Intent(MainActivity.this, BollwoodActivity.class);
+                        Intent i = new Intent(MainActivity.this, InsertDtaActivity.class);
                         startActivity(i);
                     }
                     Toast.makeText(MainActivity.this, "Button Clicked = " + a[index], Toast.LENGTH_SHORT).show();

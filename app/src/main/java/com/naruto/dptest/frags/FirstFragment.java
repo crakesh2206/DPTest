@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.naruto.dptest.DBController;
 import com.naruto.dptest.R;
 
@@ -111,17 +109,17 @@ public class FirstFragment extends Fragment {
         tvMMopen_digit.setTextColor(getResources().getColor(R.color.perpal));
         tvMMclose_digit.setTextColor(getResources().getColor(R.color.perpal));
 
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDopen_digit);
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDclose_digit);
-
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLopendigit);
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLclose_digit);
-
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNopen_digit);
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNclose_digit);
-
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMopen_digit);
-        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMclose_digit);
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDopen_digit);
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMDclose_digit);
+//
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLopendigit);
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvKLclose_digit);
+//
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNopen_digit);
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMNclose_digit);
+//
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMopen_digit);
+//        YoYo.with(Techniques.Swing).duration(1000).repeat(5).playOn(tvMMclose_digit);
 
 
 
