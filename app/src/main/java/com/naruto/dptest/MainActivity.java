@@ -1,16 +1,16 @@
 package com.naruto.dptest;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,22 +29,23 @@ public class MainActivity extends AppCompatActivity {
     private MyPagerAdapter adapterViewPager;
     ArrayList<HashMap<String, String>> dataofTable;
     ViewPager vpPager;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_header);
-        pagerTabStrip.setDrawFullUnderline(true);
-        pagerTabStrip.setTabIndicatorColor(Color.GREEN);
-        pagerTabStrip.setTextColor(Color.GREEN);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final FanMenuButtons submenu = (FanMenuButtons) findViewById(R.id.myFABSubmenu);
 
         vpPager = (ViewPager) findViewById(R.id.vpPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        new LongOperation().execute();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new LongOperation().execute();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -209,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             adapterViewPager = new MainActivity.MyPagerAdapter(getSupportFragmentManager(), dataofTable);
             vpPager.setAdapter(adapterViewPager);
+            tabLayout.setupWithViewPager(vpPager);
         }
     }
 }

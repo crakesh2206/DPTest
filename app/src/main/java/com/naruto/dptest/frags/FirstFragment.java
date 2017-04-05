@@ -72,7 +72,8 @@ public class FirstFragment extends Fragment {
 
         tvMDopen.setText(stringStringHashMap.get(DBController.KEY_MDOPEN));
         tvMDopen_digit.setText(stringStringHashMap.get(DBController.KEY_MDOPEN_DIGIT));
-        tvMDclose.setText(stringStringHashMap.get(DBController.KEY_MDCLOSE));
+     //   tvMDclose.setText(stringStringHashMap.get(DBController.KEY_MDCLOSE));
+          tvMDclose.setText("2\n5\n6");
         tvMDclose_digit.setText(stringStringHashMap.get(DBController.KEY_MDCLOSE_DIGIT));
 
         tvKLopen.setText(stringStringHashMap.get(DBController.KEY_KL_OPEN));
@@ -90,20 +91,28 @@ public class FirstFragment extends Fragment {
         tvMMclose.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE));
         tvMMclose_digit.setText(stringStringHashMap.get(DBController.KEY_MUM_CLOSE_DIGIT));
 
+        tvMDopen.setTypeface(custom_font);
+        tvMDclose.setTypeface(custom_font);
         tvMDopen_digit.setTypeface(custom_font);
         tvMDclose_digit.setTypeface(custom_font);
         tvMDopen_digit.setTextColor(getResources().getColor(R.color.pink));
         tvMDclose_digit.setTextColor(getResources().getColor(R.color.pink));
-
+        tvKLopen.setTypeface(custom_font);
+        tvKLclose.setTypeface(custom_font);
         tvKLopendigit.setTypeface(custom_font);
         tvKLclose_digit.setTypeface(custom_font);
         tvKLopendigit.setTextColor(getResources().getColor(R.color.perpal));
         tvKLclose_digit.setTextColor(getResources().getColor(R.color.perpal));
 
+        tvMNopen.setTypeface(custom_font);
+        tvMNclose.setTypeface(custom_font);
         tvMNopen_digit.setTypeface(custom_font);
         tvMNclose_digit.setTypeface(custom_font);
         tvMNopen_digit.setTextColor(getResources().getColor(R.color.pink));
         tvMNclose_digit.setTextColor(getResources().getColor(R.color.pink));
+
+        tvMMopen.setTypeface(custom_font);
+        tvMMclose.setTypeface(custom_font);
         tvMMopen_digit.setTypeface(custom_font);
         tvMMclose_digit.setTypeface(custom_font);
         tvMMopen_digit.setTextColor(getResources().getColor(R.color.perpal));

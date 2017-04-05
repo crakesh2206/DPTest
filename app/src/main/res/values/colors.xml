@@ -10,7 +10,7 @@
     <color name="red_4">#FF5722</color>
 
 
-    <color name="green_fam">#42f495</color>
+    <color name="green_fam">#000000</color>
     <color name="pink">#ff3fd2</color>
       <color name="perpal">#7028ff</color>
     <integer-array name="button_colors">

@@ -20,7 +20,7 @@
     <LinearLayout
     android:id="@+id/itemroot"
     android:layout_width="match_parent"
-        android:background="@drawable/cardv"
+        android:background="#ffffff"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
